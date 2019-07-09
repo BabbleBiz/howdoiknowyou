@@ -21,9 +21,7 @@ class Input extends React.Component {
   addEvent = e => {
     e.preventDefault();
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
+    db.settings({});
     const eventRef = db.collection("guests").add({
       guestName: this.state.guestName,
       additionalName: this.state.additionalName,

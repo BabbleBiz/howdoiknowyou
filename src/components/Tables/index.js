@@ -1,35 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import firebase from 'firebase'
 import firestore from '../Firebase'
 
 
-class Tables extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      tables: [],
-      guests: []
-    }
-  }
-  async componentDidMount () {
-    const db = firebase.firestore();
-    const guestsRepsonse = await await db.collection('guests').get()
-    const guests = guestsRepsonse.docs.map(doc => doc.data())
-    console.log(guests[0].guestName)
-    this.setState({
-      guests
-    })
-  }
-  render() {
+function Tables () {
+  const [guests, setGuests] = useState([])
+
+  const db = firebase.firestore();
+
+  useEffect( () => {
+      return db.collection('guests').onSnapshot(snapshot => {
+          setGuests( snapshot.docs.map(doc => doc.data()) )
+      }, err => {
+        console.log(`Encountered error: ${err}`);
+      })
+  }, [])
+
     return (
     <div>
       <h1>Tables</h1>
-    {this.state.guests.map(guest =>{
+    {guests.map(guest =>{
      return (<div key={guest.guestName}>{guest.guestName}</div>)}
     )}
     </div>
     )
-  }
+
 };
 
 export default Tables;
