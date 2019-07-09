@@ -1,10 +1,12 @@
 import React from 'react';
-import Account from '../Account'
+import Input from '../Input'
+import Tables from '../Tables'
 
 const App = () => (
   <div>
     <h1>App</h1>
-    <Account />
+    <Input />
+    <Tables />
   </div>
 );
 
