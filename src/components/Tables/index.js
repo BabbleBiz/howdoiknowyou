@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import firebase from 'firebase'
 import firestore from '../Firebase'
+import {List} from 'semantic-ui-react'
 
 
 function Tables () {
@@ -23,20 +24,23 @@ function Tables () {
     return (
     <div>
       <h1>Tables</h1>
-      <div>High
+      <div> High
+        <List divided relaxed>
           {highPrio.map(guest => {
-            return (<div key={guest.guestName} >{guest.guestName}</div>)
+            return (<List.Item key={guest.guestName} >{guest.guestName}</List.Item>)
           }
           )}
+        </List>
       </div>
       <br/>
       <div>Low
+        <List divided relaxed>
           {lowPrio.map(guest => {
-            return (<div key={guest.guestName} >{guest.guestName}</div>)
+            return (<List.Item key={guest.guestName} >{guest.guestName}</List.Item>)
           }
           )}
-        </div>
-
+        </List>
+      </div>
     </div>
     )
 
